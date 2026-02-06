@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Background com DOM</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  background: #f2f2f2;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+<h2>Mudar cor do fundo</h2>
+<button id="btn">Mudar cor</button>
+
+<script>
+    // 1) Seleciona o botão
+const botao = document.getElementById('btn');
+
+// 2) Variável de controle
+let fundoClaro = true;
+
+// 3) Evento de clique
+botao.addEventListener('click', function () {
+
+  // 4) Verifica o estado atual
+  if (fundoClaro) {
+    document.body.style.backgroundColor = '#222';
+    document.body.style.color = 'white';
+  } else {
+    document.body.style.backgroundColor = '#f2f2f2';
+    document.body.style.color = 'black';
+  }
+
+  // 5) Inverte o estado
+  fundoClaro = !fundoClaro;
+});
+
+</script>
+</body>
+</html>

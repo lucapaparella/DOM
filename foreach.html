@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>forEach no DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 200px;
+    }
+
+    li {
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+    li.ativo {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Lista de Tecnologias</h2>
+
+<ul>
+  <li class="item">HTML</li>
+  <li class="item">CSS</li>
+  <li class="item">JavaScript</li>
+</ul>
+
+<script >// ================================
+// 1) Seleciona TODOS os elementos
+// ================================
+const itens = document.querySelectorAll('.item');
+
+/*
+NodeList:
+- Parece um array
+- Não é array
+- Possui forEach
+*/
+
+// ==========================================
+// 2) forEach CLÁSSICO (função tradicional)
+// ==========================================
+itens.forEach(function (item, index) {
+  console.log('CLÁSSICO');
+  console.log('Elemento:', item);
+  console.log('Texto:', item.innerText);
+  console.log('Índice:', index);
+});
+
+// ==========================================
+// 3) forEach com ARROW FUNCTION (=>)
+// ==========================================
+itens.forEach((item, index) => {
+  console.log('ARROW');
+  console.log('Elemento:', item);
+  console.log('Texto:', item.innerText);
+  console.log('Índice:', index);
+});
+
+// ==========================================
+// 4) Uso REAL: evento + classe visual
+// ==========================================
+itens.forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('ativo');
+  });
+});
+</script>
+</body>
+</html>

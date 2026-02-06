@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pagina2.html">Pagina 2</a></li>
+        <li><a href="pagina3.html">Pagina 3</a></li>
+        <li><a href="pagina4.html">Pagina 4</a></li>
+    </ul>
+    <div id="container">
+  <h1>Título</h1>
+  <p>Parágrafo</p>
+</div>
+    <script>
+        const container = document.getElementById('container');
+
+const filhos = container.children;        // filhos diretos
+console.log(typeof filhos)
+console.log(filhos.length)
+console.log(filhos[0].innerText)
+console.log(filhos[1].innerText)
+
+const primeiroFilho = container.firstElementChild;
+console.log(primeiroFilho)
+const ultimoFilho = container.lastElementChild;
+console.log(ultimoFilho)
+
+
+//Subir na árvore
+const h1 = document.querySelector('h1');
+console.log(h1.parentElement)
+    </script>
+</body>
+</html>

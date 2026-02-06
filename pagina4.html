@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Loja</title>
+    <link rel="stylesheet" href="./CSS/estilo.css">
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pagina2.html">Pagina 2</a></li>
+        <li><a href="pagina3.html">Pagina 3</a></li>
+        <li><a href="pagina4.html">Pagina 4</a></li>
+        <li><a href="dataset.html">Dataset</a></li>
+
+         <h1>Dataset no DOM (data-*)</h1>
+  <p class="muted">Clique nos filtros e adicione itens. Tudo usando <code>dataset</code>.</p>
+
+  <div class="top">
+    <strong>Filtrar:</strong>
+    <button class="filtro ativo" data-categoria="tudo">Tudo</button>
+    <button class="filtro" data-categoria="perifericos">Periféricos</button>
+    <button class="filtro" data-categoria="hardware">Hardware</button>
+    <button class="filtro" data-categoria="cabos">Cabos</button>
+  </div>
+
+  <section class="grid" id="produtos">
+    <!-- Repare: cada card guarda dados em data-* -->
+    <article class="card" data-categoria="perifericos" data-id="101" data-nome="Mouse" data-preco="59.90">
+      <h3>Mouse</h3>
+      <p class="muted">Categoria: Periféricos</p>
+      <div class="row">
+        <span><strong>R$</strong> 59,90</span>
+        <button class="add" data-acao="adicionar">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" data-categoria="perifericos" data-id="102" data-nome="Teclado" data-preco="129.90">
+      <h3>Teclado</h3>
+      <p class="muted">Categoria: Periféricos</p>
+      <div class="row">
+        <span><strong>R$</strong> 129,90</span>
+        <button class="add" data-acao="adicionar">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" data-categoria="hardware" data-id="201" data-nome="SSD 480GB" data-preco="199.90">
+      <h3>SSD 480GB</h3>
+      <p class="muted">Categoria: Hardware</p>
+      <div class="row">
+        <span><strong>R$</strong> 199,90</span>
+        <button class="add" data-acao="adicionar">Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" data-categoria="cabos" data-id="301" data-nome="Cabo HDMI" data-preco="29.90">
+      <h3>Cabo HDMI</h3>
+      <p class="muted">Categoria: Cabos</p>
+      <div class="row">
+        <span><strong>R$</strong> 29,90</span>
+        <button class="add" data-acao="adicionar">Adicionar</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="painel">
+    <h2>Carrinho</h2>
+    <p class="muted">Itens adicionados aparecem aqui (simples e didático).</p>
+
+    <ul class="lista" id="carrinho"></ul>
+
+    <div class="row">
+      <strong>Total:</strong>
+      <strong id="total">R$ 0,00</strong>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <button id="limpar" data-acao="limpar">Limpar Carrinho</button>
+      <span class="muted" id="msg"></span>
+    </div>
+  </section>
+    </ul>
+
+   <script>
+  /********************************************************************
+   * ESTE SCRIPT TEM DOIS OBJETIVOS PRINCIPAIS:
+   *
+   * 1) Filtrar produtos por categoria usando atributos data-* (dataset)
+   * 2) Simular um carrinho de compras simples, também usando dataset
+   *
+   * Tudo aqui trabalha com:
+   * - DOM (document, querySelector, addEventListener)
+   * - dataset (data-*)
+   * - eventos de clique
+   ********************************************************************/
+
+
+  // ==========================================================
+  // 1) FILTRO DE PRODUTOS USANDO DATASET
+  // ==========================================================
+
+
+  // Seleciona TODOS os botões que possuem a classe "filtro"
+  // Retorna uma NodeList (parecida com um array)
+  const botoesFiltro = document.querySelectorAll(".filtro");
+
+  // Seleciona TODOS os cards de produto
+  // Cada card tem atributos data-categoria
+  const cards = document.querySelectorAll(".card");
+
+
+  // Percorre cada botão de filtro
+  botoesFiltro.forEach(btn => {
+
+    // Para cada botão, adicionamos um "escutador de evento"
+    // Esse código só roda quando o botão for clicado
+    btn.addEventListener("click", () => {
+
+      // ------------------------------------------------------
+      // 1.1) Descobrir QUAL categoria foi clicada
+      // ------------------------------------------------------
+      // O HTML do botão tem algo como:
+      // <button data-categoria="hardware">
+      //
+      // btn.dataset.categoria acessa esse valor
+      const categoriaEscolhida = btn.dataset.categoria;
+
+
+      // ------------------------------------------------------
+      // 1.2) Atualizar o visual (botão ativo)
+      // ------------------------------------------------------
+      // Primeiro removemos a classe "ativo" de TODOS os botões
+      botoesFiltro.forEach(b => b.classList.remove("ativo"));
+
+      // Depois adicionamos a classe "ativo" apenas
+      // no botão que foi clicado
+      btn.classList.add("ativo");
+
+
+      // ------------------------------------------------------
+      // 1.3) Mostrar ou esconder os cards
+      // ------------------------------------------------------
+      // Agora percorremos TODOS os cards de produto
+      cards.forEach(card => {
+
+        // Cada card possui um data-categoria
+        // Ex: <article class="card" data-categoria="cabos">
+        const catDoCard = card.dataset.categoria;
+
+        // Regra:
+        // - Se o filtro for "tudo", mostramos todos
+        // - Se não, mostramos apenas os que batem com a categoria
+        const mostrar =
+          categoriaEscolhida === "tudo" ||
+          catDoCard === categoriaEscolhida;
+
+        // classList.toggle:
+        // - adiciona a classe "hidden" se mostrar for FALSE
+        // - remove a classe "hidden" se mostrar for TRUE
+        //
+        // hidden geralmente tem:
+        // display: none;
+        card.classList.toggle("hidden", !mostrar);
+      });
+    });
+  });
+
+
+  // ==========================================================
+  // 2) CARRINHO DE COMPRAS USANDO DATASET
+  // ==========================================================
+
+
+  // Elemento <ul> onde os itens do carrinho serão listados
+  const listaCarrinho = document.getElementById("carrinho");
+
+  // Elemento onde o valor total será exibido
+  const totalEl = document.getElementById("total");
+
+  // Elemento usado para mostrar mensagens rápidas (feedback)
+  const msgEl = document.getElementById("msg");
+
+  // Botão para limpar o carrinho
+  const btnLimpar = document.getElementById("limpar");
+
+
+  // Variável que guarda o valor total do carrinho
+  // Começa em zero
+  let total = 0;
+
+
+  // ----------------------------------------------------------
+  // Delegação de eventos
+  // ----------------------------------------------------------
+  // Em vez de adicionar um evento em CADA botão "Adicionar",
+  // colocamos UM ÚNICO listener no container dos produtos.
+  //
+  // Isso é mais eficiente e mais profissional.
+  document.getElementById("produtos").addEventListener("click", (e) => {
+
+    // e.target é o elemento exato que foi clicado
+    const botao = e.target;
+
+    // Se o clique NÃO foi em um botão com classe "add",
+    // o código para aqui (return)
+    if (!botao.classList.contains("add")) return;
+
+
+    // ------------------------------------------------------
+    // O botão está DENTRO do card do produto
+    // closest(".card") sobe no DOM até achar o card pai
+    // ------------------------------------------------------
+    const card = botao.closest(".card");
+
+
+    // ------------------------------------------------------
+    // 2.1) Lendo os dados do produto via dataset
+    // ------------------------------------------------------
+    // Todos esses valores vêm do HTML (data-*)
+    const id = card.dataset.id;         // string
+    const nome = card.dataset.nome;     // string
+
+    // dataset SEMPRE retorna string
+    // Por isso convertemos o preço para número
+    const preco = Number(card.dataset.preco);
+
+
+    // ------------------------------------------------------
+    // 2.2) Criar visualmente o item no carrinho
+    // ------------------------------------------------------
+    // Criamos um novo <li>
+    const li = document.createElement("li");
+
+    // Definimos o texto que aparecerá no carrinho
+    li.textContent = `${nome} (ID: ${id}) - R$ ${preco
+      .toFixed(2)
+      .replace(".", ",")}`;
+
+    // Adicionamos o <li> dentro da lista do carrinho
+    listaCarrinho.appendChild(li);
+
+
+    // ------------------------------------------------------
+    // 2.3) Atualizar o total do carrinho
+    // ------------------------------------------------------
+    total += preco;
+
+    // Atualiza o texto do total no HTML
+    totalEl.textContent = `R$ ${total
+      .toFixed(2)
+      .replace(".", ",")}`;
+
+
+    // ------------------------------------------------------
+    // Feedback visual para o usuário
+    // ------------------------------------------------------
+    msgEl.textContent = `Adicionado: ${nome}`;
+
+    // Após 1,2 segundos, a mensagem some
+    setTimeout(() => {
+      msgEl.textContent = "";
+    }, 1200);
+  });
+
+
+  // ==========================================================
+  // 3) LIMPAR O CARRINHO
+  // ==========================================================
+
+  btnLimpar.addEventListener("click", () => {
+
+    // Remove todos os <li> do carrinho
+    listaCarrinho.innerHTML = "";
+
+    // Zera o valor total
+    total = 0;
+
+    // Atualiza o texto do total
+    totalEl.textContent = "R$ 0,00";
+
+    // Mostra mensagem de confirmação
+    msgEl.textContent = "Carrinho limpo!";
+
+    // Remove a mensagem após 1,2 segundos
+    setTimeout(() => {
+      msgEl.textContent = "";
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>

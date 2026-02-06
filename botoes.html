@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercício – Botões</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 2px solid #444;
+  background: #eee;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn.ativo {
+  background: #222;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+
+<h2>Escolha uma opção</h2>
+
+<div class="botoes">
+  <button class="btn">Opção 1</button>
+  <button class="btn">Opção 2</button>
+  <button class="btn">Opção 3</button>
+</div>
+
+<script>
+    // 1) Seleciona todos os botões
+const botoes = document.querySelectorAll('.btn');
+
+// 2) Percorre o NodeList
+botoes.forEach(botao => {
+
+  // 3) Adiciona evento de clique
+  botao.addEventListener('click', () => {
+
+    // 4) Remove a classe de TODOS
+    botoes.forEach(b => {
+      b.classList.remove('ativo');
+    });
+
+    // 5) Ativa apenas o botão clicado
+    botao.classList.add('ativo');
+
+  });
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll por Menu - Iniciante</title>
+
+  <style>
+    /* ===============================
+       ESTILO GERAL DA PÁGINA
+    =============================== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+
+      /* Faz o scroll ficar suave */
+      scroll-behavior: smooth;
+    }
+
+    /* ===============================
+       MENU FIXO NO TOPO
+    =============================== */
+    nav {
+      position: fixed;     /* Fica parado no topo */
+      top: 0;
+      width: 100%;
+      background-color: #222;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      text-decoration: underline;
+    }
+
+    /* ===============================
+       SEÇÕES DA PÁGINA
+    =============================== */
+    section {
+      height: 100vh;       /* Cada seção ocupa a tela inteira */
+      padding-top: 80px;   /* Espaço para não ficar atrás do menu */
+      padding-left: 20px;
+    }
+
+    #secao1 {
+      background-color: #f2f2f2;
+    }
+
+    #secao2 {
+      background-color: #222;
+      color: white;
+    }
+
+    #secao3 {
+      background-color: #1565c0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===============================
+       MENU
+  =============================== -->
+  <nav>
+    <!-- Cada botão aponta para uma seção -->
+    <button data-alvo="secao1">Seção 1</button>
+    <button data-alvo="secao2">Seção 2</button>
+    <button data-alvo="secao3">Seção 3</button>
+  </nav>
+
+  <!-- ===============================
+       CONTEÚDO DA PÁGINA
+  =============================== -->
+  <section id="secao1">
+    <h1>Seção 1</h1>
+    <p>Conteúdo da primeira seção.</p>
+  </section>
+
+  <section id="secao2">
+    <h1>Seção 2</h1>
+    <p>Conteúdo da segunda seção.</p>
+  </section>
+
+  <section id="secao3">
+    <h1>Seção 3</h1>
+    <p>Conteúdo da terceira seção.</p>
+  </section>
+
+  <!-- ===============================
+       JAVASCRIPT (DOM)
+  =============================== -->
+  <script>
+    // 1) Seleciona TODOS os botões do menu
+    var botoes = document.querySelectorAll('nav button');
+
+    // 2) Percorre os botões usando FOR clássico
+    for (var i = 0; i < botoes.length; i++) {
+
+      // 3) Adiciona o evento de clique em cada botão
+      botoes[i].addEventListener('click', function () {
+
+        // 4) Pega o valor do atributo data-alvo
+        // Exemplo: "secao1"
+        var idSecao = this.getAttribute('data-alvo');
+
+        // 5) Encontra a seção correspondente pelo ID
+        var secao = document.getElementById(idSecao);
+
+        // 6) Faz a página rolar até essa seção
+        secao.scrollIntoView();
+      });
+    }
+  </script>
+
+</body>
+</html>

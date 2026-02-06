@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Exemplo Dataset - DOM</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .painel {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+
+    .caixa {
+      width: 200px;
+      height: 120px;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+    <h1>Uso de <code>dataset</code> no DOM</h1>
+  <p>Cada botão possui informações em <code>data-*</code> que controlam a caixa.</p>
+
+  <!-- Painel de botões -->
+  <div class="painel">
+    <button data-cor="red" data-texto="Perigo">Vermelho</button>
+    <button data-cor="green" data-texto="Seguro">Verde</button>
+    <button data-cor="blue" data-texto="Informação">Azul</button>
+
+    <button data-tamanho="pequeno">Pequeno</button>
+    <button data-tamanho="medio">Médio</button>
+    <button data-tamanho="grande">Grande</button>
+  </div>
+
+  <!-- Elemento controlado -->
+  <div class="caixa" id="caixa">CAIXA</div>
+
+  <script>
+    /************************************************************
+     * EXEMPLO DIDÁTICO DE DATASET
+     *
+     * - Nenhum ID mágico
+     * - Nenhum if por tipo de botão
+     * - Tudo decidido por data-*
+     ************************************************************/
+
+    // Seleciona TODOS os botões
+    const botoes = document.querySelectorAll("button");
+
+    // Seleciona a caixa que será alterada
+    const caixa = document.getElementById("caixa");
+
+    // Para cada botão...
+    botoes.forEach(botao => {
+
+      // Escuta o clique
+      botao.addEventListener("click", () => {
+
+        // ---------------------------------------
+        // 1) ALTERAR COR E TEXTO
+        // ---------------------------------------
+        // Se o botão possuir data-cor,
+        // significa que ele altera a cor da caixa
+        if (botao.dataset.cor) {
+          caixa.style.backgroundColor = botao.dataset.cor;
+          caixa.textContent = botao.dataset.texto;
+        }
+
+        // ---------------------------------------
+        // 2) ALTERAR TAMANHO
+        // ---------------------------------------
+        // Se o botão possuir data-tamanho,
+        // significa que ele altera o tamanho da caixa
+        if (botao.dataset.tamanho) {
+
+          // Usamos o valor do dataset para decidir
+          // o comportamento visual
+          switch (botao.dataset.tamanho) {
+            case "pequeno":
+              caixa.style.width = "120px";
+              caixa.style.height = "80px";
+              break;
+
+            case "medio":
+              caixa.style.width = "200px";
+              caixa.style.height = "120px";
+              break;
+
+            case "grande":
+              caixa.style.width = "320px";
+              caixa.style.height = "180px";
+              break;
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

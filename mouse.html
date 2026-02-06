@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouseover - DOM</title>
+
+  <style>
+    /* ===============================
+       ESTILO DA PÁGINA
+    =============================== */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Texto que será alterado */
+    .texto {
+      font-size: 24px;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Evento mouseover</h2>
+
+  <!-- TEXTO -->
+  <p id="texto" class="texto">
+    Se passar o maouse por cima desse texto, ele muda de cor
+  </p>
+
+  <!-- ===============================
+       JAVASCRIPT (DOM)
+  =============================== -->
+  <script>
+    // 1) Seleciona o texto
+    var texto = document.getElementById('texto');
+
+    var body = document.querySelector("body")
+
+    // 2) Quando o mouse ENTRA no elemento
+    texto.addEventListener('click', function () {
+      // Muda a cor do texto
+      texto.style.color = 'red';
+      texto.style.backgroundColor = "yellow"
+    //   document.body.style.backgroundColor = "red"
+      body.style.backgroundColor = "red"
+      
+    });
+
+    // 3) Quando o mouse SAI do elemento
+    texto.addEventListener('mouseout', function () {
+      // Volta para a cor original
+      texto.style.color = 'black';
+      texto.style.backgroundColor = "white"
+    //   document.body.style.backgroundColor =  "white"
+      body.style.backgroundColor = "white"
+      
+      
+    });
+  </script>
+
+</body>
+</html>

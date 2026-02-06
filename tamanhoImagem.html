@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mover e Redimensionar Imagem</title>
+
+  <style>
+    /* ===============================
+       ESTILO DA PÁGINA
+    =============================== */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Área onde a imagem se movimenta */
+    .area {
+      width: 400px;
+      height: 300px;
+      border: 2px dashed #999;
+      position: relative; /* referência para a imagem */
+      margin-bottom: 20px;
+    }
+
+    /* Imagem controlada pelo DOM */
+    img {
+      position: absolute; /* permite mover com top/left */
+      top: 50px;
+      left: 50px;
+      width: 100px;
+      transition: all 0.2s; /* movimento suave */
+    }
+
+    /* Botões */
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Mover e Redimensionar Imagem</h2>
+
+  <!-- Área de movimento -->
+  <div class="area">
+    <img id="imagem" src="https://placehold.co/200" alt="Imagem">
+  </div>
+
+  <!-- CONTROLES DE MOVIMENTO -->
+  <h3>Mover</h3>
+  <button id="cima">⬆ Cima</button>
+  <button id="baixo">⬇ Baixo</button>
+  <button id="esq">⬅ Esquerda</button>
+  <button id="dir">➡ Direita</button>
+
+  <!-- CONTROLES DE TAMANHO -->
+  <h3>Tamanho</h3>
+  <button id="aumentar">➕ Aumentar</button>
+  <button id="diminuir">➖ Diminuir</button>
+
+  <!-- ===============================
+       JAVASCRIPT (DOM)
+  =============================== -->
+  <script>
+    // Seleciona a imagem
+    var img = document.getElementById('imagem');
+
+    // Variáveis de posição
+    var posX = 50;
+    var posY = 50;
+
+    // Variável de tamanho
+    var largura = 100;
+
+    // ===============================
+    // FUNÇÕES DE MOVIMENTO
+    // ===============================
+
+    document.getElementById('cima').addEventListener('click', function () {
+      posY -= 150; // sobe
+      img.style.top = posY + 'px';
+    });
+
+    document.getElementById('baixo').addEventListener('click', function () {
+      posY += 150; // desce
+      img.style.top = posY + 'px';
+    });
+
+    document.getElementById('esq').addEventListener('click', function () {
+      posX -= 150; // esquerda
+      img.style.left = posX + 'px';
+    });
+
+    document.getElementById('dir').addEventListener('click', function () {
+      posX += 150; // direita
+      img.style.left = posX + 'px';
+    });
+
+    // ===============================
+    // FUNÇÕES DE TAMANHO
+    // ===============================
+
+    document.getElementById('aumentar').addEventListener('click', function () {
+      largura += 10;
+      img.style.width = largura + 'px';
+    });
+
+    document.getElementById('diminuir').addEventListener('click', function () {
+      largura -= 10;
+      img.style.width = largura + 'px';
+    });
+  </script>
+
+</body>
+</html>

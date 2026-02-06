@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Capturar Filhos da Div</title>
+
+  <style>
+    /* ===============================
+       ESTILO DA PÁGINA
+    =============================== */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    /* Div pai */
+    .container {
+      border: 2px solid #333;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Filhos */
+    .item {
+      padding: 8px;
+      margin: 5px 0;
+      background: #f2f2f2;
+    }
+
+    /* Área de resultado */
+    .resultado {
+      background: #eee;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Capturar os filhos de uma DIV</h2>
+
+  <!-- DIV PAI -->
+  <div class="container" id="pai">
+    <div class="item">Filho 1</div>
+    <div class="item">Filho 2</div>
+    <div class="item">Filho 3</div>
+  </div>
+
+  <!-- BOTÃO -->
+  <button id="btn">Mostrar filhos</button>
+
+  <!-- LOCAL PARA MOSTRAR O RESULTADO -->
+  <div class="resultado" id="resultado">
+    Clique no botão para ver os filhos da div.
+  </div>
+
+  <!-- ===============================
+       JAVASCRIPT (DOM)
+  =============================== -->
+  <script>
+    // 1) Seleciona a div pai
+    var divPai = document.getElementById('pai');
+
+    // 2) Seleciona o botão
+    var botao = document.getElementById('btn');
+
+    // 3) Seleciona a área de resultado
+    var resultado = document.getElementById('resultado');
+
+    // 4) Evento de clique no botão
+    botao.addEventListener('click', function () {
+
+      // 5) Captura os filhos da div pai
+      var filhos = divPai.children;
+
+      // Limpa o conteúdo anterior
+      resultado.innerHTML = '';
+
+      // 6) Mostra quantos filhos existem
+      resultado.innerHTML += 'Quantidade de filhos: ' + filhos.length + '<br><br>';
+
+      // 7) Percorre os filhos usando FOR clássico
+      for (var i = 0; i < filhos.length; i++) {
+
+        // Mostra o texto de cada filho
+        resultado.innerHTML +=
+          (i + 1) + 'º item => ' + filhos[i].innerText + '<br>';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<script>
+  const botoes = document.querySelectorAll("button");
+  const status = document.getElementById("status");
+
+  botoes.forEach(botao => {
+    botao.addEventListener("click", () => {
+
+      // Lendo dados do dataset
+      const cor = botao.dataset.cor;
+      const texto = botao.dataset.texto;
+      const nivel = botao.dataset.nivel;
+
+      // Aplicando cor e texto
+      status.style.backgroundColor = cor;
+      status.textContent = texto;
+
+      // Alterando tamanho conforme o nível
+      switch (nivel) {
+        case "baixo":
+          status.style.width = "200px";
+          status.style.height = "120px";
+          break;
+
+        case "medio":
+          status.style.width = "240px";
+          status.style.height = "140px";
+          break;
+
+        case "alto":
+          status.style.width = "300px";
+          status.style.height = "180px";
+          break;
+      }
+    });
+  });
+</script>

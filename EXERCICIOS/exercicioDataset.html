@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercício Dataset</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .painel {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+
+    .status {
+      width: 240px;
+      height: 140px;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Exercício: dataset no DOM</h1>
+  <p>Cada botão controla a caixa usando <code>data-*</code>.</p>
+
+  <div class="painel">
+    <button data-cor="green" data-texto="Normal" data-nivel="baixo">
+      Normal
+    </button>
+
+    <button data-cor="orange" data-texto="Atenção" data-nivel="medio">
+      Atenção
+    </button>
+
+    <button data-cor="red" data-texto="Crítico" data-nivel="alto">
+      Crítico
+    </button>
+  </div>
+
+  <div class="status" id="status">
+    STATUS
+  </div>
+
+  <script>
+    /********************************************************
+     * EXERCÍCIO
+     *
+     * Complete o código abaixo usando dataset
+     ********************************************************/
+
+    // 1) Selecione TODOS os botões do painel
+
+
+    // 2) Selecione a caixa de status
+
+
+    // 3) Para cada botão, adicione um evento de clique
+
+
+        // 4) Ao clicar, leia:
+        //    - a cor (data-cor)
+        //    - o texto (data-texto)
+        //    - o nível (data-nivel)
+
+
+        // 5) Aplique:
+        //    - a cor como background da caixa
+        //    - o texto dentro da caixa
+
+
+        // 6) Use o nível para mudar o TAMANHO da caixa:
+        //    - baixo  → 200x120
+        //    - medio  → 240x140
+        //    - alto   → 300x180
+
+
+  </script>
+
+</body>
+</html>
